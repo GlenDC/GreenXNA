@@ -45,4 +45,4 @@ As I'm building this framework on top of MonoGame, I decided to apply their cont
 
 ## License
 
-MonoGame is released under [GNU General Public License, version 3 (GPL-3.0)](url)
+MonoGame is released under [GNU General Public License, version 3 (GPL-3.0)](https://github.com/GlenDC/GreenXNA/blob/master/LICENSE.txt)
