@@ -4,6 +4,12 @@
 
 The goal of GreenXNA is to allow Game Developers, familiar with XNA and/or MonoGame to develop games faster and easier. As this framework is build on top of MonoGame, it will also offer you to release your games on crossplatform with extremly high code reuse.
 
+## Current Stage: In Development
+
+## Next Expected Release: 
+* 30th of July, 2013
+* Version 0.0.1
+
 ## Supported Platforms
 
 * Implemented:
