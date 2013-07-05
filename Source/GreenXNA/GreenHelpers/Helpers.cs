@@ -37,5 +37,45 @@ namespace GreenXNA.GreenHelpers
                 hash = 65599 * hash + str[i];
             return hash ^ (hash >> 16);
         }
+
+        /// <summary>
+        /// Convert an integer to a string
+        /// </summary>
+        /// <param name="integer">integer to be converted to a string</param>
+        /// <returns>string, containing the value of the interger in a string format</returns>
+        public static string IntToString(int integer)
+        {
+            return integer.ToString();
+        }
+
+        /// <summary>
+        /// Convert an integer to a string with x amount of digits
+        /// </summary>
+        /// <param name="integer">integer to be converted to a string</param>
+        /// <param name="digits">amount of digits required in the string</param>
+        /// <returns>string, containing the value of the interger in a string format with x amount of digits</returns>
+        public static string IntToString(int integer, int digits)
+        {
+            digits = Math.Max(0, digits);
+            string result = "";
+            if (digits > 0)
+            {
+                int checkNumber = (int)Math.Pow(10, digits-1);
+                for (int i = digits; i > 1; --i)
+                {
+                    if (integer < checkNumber)
+                    {
+                        result += "0";
+                        checkNumber /= 10;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            result += IntToString(integer);
+            return result;
+        }
     }
 }
