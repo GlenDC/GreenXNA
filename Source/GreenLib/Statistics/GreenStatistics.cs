@@ -4,7 +4,7 @@
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014 Glen De Cauwsemaecker
-// More information and details can be found at http://greenxna.glendc.com/
+// More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,8 +21,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using GreenXNA.GreenHelpers;
-
-using Microsoft.Xna.Framework;
 #endregion
 
 namespace GreenXNA.Statistics
@@ -72,9 +70,13 @@ namespace GreenXNA.Statistics
             _FPS.Initialize();
         }
 
-        public static void Update(GameTime gameTime)
+        /// <summary>
+        /// Update the statistic sublcasses, such as PPS
+        /// </summary>
+        /// <param name="dt">time in seconds, since lastu pdate</param>
+        public static void Update(double dt)
         {
-            _FPS.Update(gameTime);
+            _FPS.Update(dt);
         }
     }
 }

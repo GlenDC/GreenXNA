@@ -4,7 +4,7 @@
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014 Glen De Cauwsemaecker
-// More information and details can be found at http://greenxna.glendc.com/
+// More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ namespace GreenXNA.Serialize.XML
         /// was loaded via the Parser class and may have been edited with new information. 
         /// </summary>
         /// <param name="parser">input to be written to an outputstream</param>
-        static public void Write(Parser parser)
+        static public void Write(XMLParser parser)
         {
             using (XmlWriter writer = XmlWriter.Create(parser.DocumentPath))
             {
@@ -55,7 +55,7 @@ namespace GreenXNA.Serialize.XML
                     }
                 }
                 --tabSpace;
-                writer.WriteRaw("\n" + DebugParser.GetTabSpace(tabSpace));
+                writer.WriteRaw("\n" + XMLDebugParser.GetTabSpace(tabSpace));
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
             }
@@ -70,7 +70,7 @@ namespace GreenXNA.Serialize.XML
         /// <param name="tabSpace">amount of tabspaces to be written in front of the output</param>
         static private void WriteLayer(XmlWriter file, string name, ParserLayer layer, int tabSpace)
         {
-            file.WriteRaw("\n" + DebugParser.GetTabSpace(tabSpace));
+            file.WriteRaw("\n" + XMLDebugParser.GetTabSpace(tabSpace));
             file.WriteStartElement(name);
             if (layer.Attributes != null)
             {
@@ -92,7 +92,7 @@ namespace GreenXNA.Serialize.XML
                 file.WriteValue(layer.InnerValue);
             --tabSpace;
             if (CheckIfLayerHasChildren(layer))
-                file.WriteRaw("\n" + DebugParser.GetTabSpace(tabSpace));
+                file.WriteRaw("\n" + XMLDebugParser.GetTabSpace(tabSpace));
             file.WriteEndElement();
         }
 

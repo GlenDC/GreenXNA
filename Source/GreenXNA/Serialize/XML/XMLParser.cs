@@ -1,10 +1,10 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// Parser.cs
+// XMLParser.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014 Glen De Cauwsemaecker
-// More information and details can be found at http://greenxna.glendc.com/
+// More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,8 +18,11 @@ using System;
 using System.Xml;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Xml.Schema;
 using System.Collections.Generic;
+
+using GreenXNA.GreenHelpers;
 #endregion
 
 namespace GreenXNA.Serialize.XML
@@ -50,7 +53,7 @@ namespace GreenXNA.Serialize.XML
                 if (pair.Key == attributeName)
                     return pair.Value;
             }
-            return Parser.ATTRIBUTE_NOT_FOUND;
+            return XMLParser.NOT_FOUND;
         }
 
         /// <summary>
@@ -62,7 +65,7 @@ namespace GreenXNA.Serialize.XML
         public string GetAttribute(string attributeName, out bool succesfull)
         {
             string value = GetAttribute(attributeName);
-            succesfull = value != Parser.ATTRIBUTE_NOT_FOUND;
+            succesfull = value != XMLParser.NOT_FOUND;
             return value;
         }
         
@@ -142,7 +145,7 @@ namespace GreenXNA.Serialize.XML
                 if (pair.Key == attributeName)
                     return pair.Value;
             }
-            return Parser.ATTRIBUTE_NOT_FOUND;
+            return XMLParser.NOT_FOUND;
         }
 
         /// <summary>
@@ -154,7 +157,7 @@ namespace GreenXNA.Serialize.XML
         public string GetAttribute(string attributeName, out bool succesfull)
         {
             string value = GetAttribute(attributeName);
-            succesfull = value != Parser.ATTRIBUTE_NOT_FOUND;
+            succesfull = value != XMLParser.NOT_FOUND;
             return value;
         }
 
@@ -182,25 +185,9 @@ namespace GreenXNA.Serialize.XML
     /// class, to be used to parse xml files and save its content.
     /// This object can then be saved again via the XMLWriter class. 
     /// </summary>
-    public class Parser
+    public sealed class XMLParser : Parser
     {
-        /// <summary>
-        /// String to be used as a default "not found" string, 
-        /// mostly as return values of functions.
-        /// </summary>
-        public const string ATTRIBUTE_NOT_FOUND = "ATTRIBUTE NOT FOUND";
-        /// <summary>
-        /// name of the XML file to be parsed
-        /// </summary>
-        string _FileName;
-        /// <summary>
-        /// default path of xml files in the project.
-        /// </summary>
-        static string _DirectoryPath;
-        /// <summary>
-        /// get value, combining the path, path and xml file-extension
-        /// </summary>
-        public string DocumentPath { get { return _DirectoryPath + _FileName + ".xml"; } }
+        
         /// <summary>
         /// XMLFile object, used to save the content of the xml file to.
         /// </summary>
@@ -209,18 +196,10 @@ namespace GreenXNA.Serialize.XML
         /// <summary>
         /// public constructor of the Parser, creating the XMLFile object.
         /// </summary>
-        public Parser()
+        public XMLParser(string name, string path)
+            : base(name, path, ".xml")
         {
             FileList = new XMLFile();
-        }
-
-        /// <summary>
-        /// Set the global directory path of the xml file
-        /// </summary>
-        /// <param name="path">path to be used as global directory path</param>
-        public static void SetDirectory(string path)
-        {
-            _DirectoryPath = path;
         }
 
         //======================================================================================
@@ -229,45 +208,68 @@ namespace GreenXNA.Serialize.XML
         /// <summary>
         /// Function to be used to read an xml file
         /// </summary>
-        /// <param name="name">name of the xml file</param>
-        public void ReadXML(string name)
+        public override void Read()
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            _FileName = name;
-            XmlReaderSettings readerSettings = new XmlReaderSettings();
-            readerSettings.IgnoreComments = true;
-            XmlReader reader = XmlReader.Create(DocumentPath, readerSettings);
-            xmlDoc.Load(reader);
+            base.Read();
 
-            XmlNode node = xmlDoc.DocumentElement;
-            if (node != null)
+            if (File.Exists(DocumentPath))
             {
-                FileList.Root = new XMLRootInformation(node.Name);
-                GetAttributes(node.Attributes, out FileList.Root.Attributes);
-                if (FileList.LayerList == null)
-                    FileList.LayerList = new Dictionary<string, List<ParserLayer>>();
-                else
-                    FileList.LayerList.Clear();
-                node = node.FirstChild;
-                if (node != null)
+                try
                 {
-                    do
+                    XmlDocument xmlDoc = new XmlDocument();
+                    XmlReaderSettings readerSettings = new XmlReaderSettings();
+                    readerSettings.IgnoreComments = true;
+                    XmlReader reader = XmlReader.Create(DocumentPath, readerSettings);
+                    xmlDoc.Load(reader);
+
+                    XmlNode node = xmlDoc.DocumentElement;
+                    if (node != null)
                     {
-                        //check if list of layers already excists
-                        if (!FileList.LayerList.ContainsKey(node.Name))
-                            FileList.LayerList.Add(node.Name, new List<ParserLayer>());
+                        FileList.Root = new XMLRootInformation(node.Name);
+                        GetAttributes(node.Attributes, out FileList.Root.Attributes);
+                        if (FileList.LayerList == null)
+                            FileList.LayerList = new Dictionary<string, List<ParserLayer>>();
+                        else
+                            FileList.LayerList.Clear();
+                        node = node.FirstChild;
+                        if (node != null)
+                        {
+                            do
+                            {
+                                //check if list of layers already excists
+                                if (!FileList.LayerList.ContainsKey(node.Name))
+                                    FileList.LayerList.Add(node.Name, new List<ParserLayer>());
 
-                        ParserLayer layer;
-                        GetLayer(node, out layer);
-                        FileList.LayerList[node.Name].Add(layer);
+                                ParserLayer layer;
+                                GetLayer(node, out layer);
+                                FileList.LayerList[node.Name].Add(layer);
 
-                        node = node.NextSibling;
-                    } while (node != null);
+                                node = node.NextSibling;
+                            } while (node != null);
+                        }
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException("Unable to locate " + DocumentPath);
             }
             //Use this public static function to get a mirrored output of the xml file. (without the header)
             //As it's public you can also use it in any other class that uses this namespace.
             //DebugParser.OutputFileList(FileList);
+        }
+
+        /// <summary>
+        /// Read the content of an XML File and convert the values 
+        /// to their correct type before saving them!
+        /// </summary>
+        public override void ReadSmart()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -324,6 +326,30 @@ namespace GreenXNA.Serialize.XML
                 //get innervalue
                 layer.InnerValue = node.InnerText;
             }
+        }
+        #endregion
+        //======================================================================================
+
+        //======================================================================================
+        //================== SAVE XML FILE =====================================================
+        #region Save File Functions
+        /// <summary>
+        /// Save the XML File to the original file (overwrite)
+        /// </summary>
+        public override void Save()
+        {
+            XMLWriter.Write(this);
+        }
+
+        /// <summary>
+        /// Save the XML File to a new file
+        /// or overwrite the same file, if the name is the same as the original one.
+        /// </summary>
+        /// <param name="newFileName">save file to this file</param>
+        public override void Save(string newFileName)
+        {
+            base.Save(newFileName);
+            XMLWriter.Write(this);
         }
         #endregion
         //======================================================================================
@@ -817,5 +843,22 @@ namespace GreenXNA.Serialize.XML
         }
         #endregion  
         //======================================================================================
+
+        /// <summary>
+        /// Copy xml file content to a parameter container
+        /// </summary>
+        /// <param name="container">container to contain all the parameters</param>
+        public override void CopyContentToParameterContainer(ref Dictionary<uint, Dictionary<uint, string>> container)
+        {
+            foreach (KeyValuePair<string, List<ParserLayer>> category in FileList.LayerList)
+            {
+                uint hashCategory = Helpers.GenerateHash(category.Key);
+                container.Add(hashCategory, new Dictionary<uint, string>());
+                foreach (ParserLayer layer in category.Value)
+                {
+                    container[hashCategory].Add(Helpers.GenerateHash(layer.GetAttribute("name")), layer.GetAttribute("value"));
+                }
+            }
+        }
     }
 }

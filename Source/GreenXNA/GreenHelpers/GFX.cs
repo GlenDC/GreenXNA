@@ -4,7 +4,7 @@
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014 Glen De Cauwsemaecker
-// More information and details can be found at http://greenxna.glendc.com/
+// More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

@@ -1,10 +1,10 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// DebugParser.cs
+// XMLDebugParser.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014 Glen De Cauwsemaecker
-// More information and details can be found at http://greenxna.glendc.com/
+// More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ namespace GreenXNA.Serialize.XML
     /// Static class that can be used to write a parsed XML File
     /// to a debug output window. This class should only be used in a debug build. 
     /// </summary>
-    static public class DebugParser
+    static public class XMLDebugParser
     {
         /// <summary>
         /// Main public function to get a mirror of your xml file into the debugging screen. 
