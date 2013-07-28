@@ -3,7 +3,7 @@
 // FPS.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
-// Copyright (C) 2013-2014 Glen De Cauwsemaecker
+// Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
@@ -28,20 +28,20 @@ namespace GreenXNA.Statistics
         /// <summary>
         /// Current time in seconds
         /// </summary>
-        private double    _CurrentTime = 0;
+        private double    m_CurrentTime = 0;
         /// <summary>
         /// Last calculated FPS
         /// </summary>
-        private int[]    _FPS;
+        private int[]    m_FPS;
         /// <summary>
         /// Counter to calculate FPS each second
         /// </summary>
-        private int      _COUNTER = 0;
+        private int      m_COUNTER = 0;
         /// <summary>
         /// Current FPS Slot ID to be used 
         /// in the FPS Hitory Array
         /// </summary>
-        private int     _FPS_ID;
+        private int     m_FPS_ID;
         /// <summary>
         /// Get a fresh calculation of the average FPS over time, 
         /// based on a predefined x amount of frames.
@@ -53,7 +53,7 @@ namespace GreenXNA.Statistics
                 int average = 0;
                 for (int i = 0; i < History_FPS_CAP; ++i)
                 {
-                    average += _FPS[i];
+                    average += m_FPS[i];
                 }
                 return average / History_FPS_CAP;
             }
@@ -61,7 +61,7 @@ namespace GreenXNA.Statistics
         /// <summary>
         /// Get the array of predefined x amount of FPS captures.
         /// </summary>
-        public int[] FPSHistory { get { return _FPS; } }
+        public int[] FPSHistory { get { return m_FPS; } }
         /// <summary>
         /// Amount of calculated FPS's that has to be saved in memory
         /// </summary>
@@ -73,12 +73,12 @@ namespace GreenXNA.Statistics
         public void Initialize()
         {
             History_FPS_CAP = 25;
-            _FPS = new int[History_FPS_CAP];
+            m_FPS = new int[History_FPS_CAP];
             for (int i = 0; i < History_FPS_CAP; ++i)
             {
-                _FPS[i] = 60;
+                m_FPS[i] = 60;
             }
-            _FPS_ID = 0;
+            m_FPS_ID = 0;
         }
 
         /// <summary>
@@ -87,20 +87,20 @@ namespace GreenXNA.Statistics
         /// <param name="dt">time in seconds, since last cpu cycle</param>
         public void Update(double dt)
         {
-            ++_COUNTER;
-            _CurrentTime += dt;
-            if (_CurrentTime >= 1.0)
+            ++m_COUNTER;
+            m_CurrentTime += dt;
+            if (m_CurrentTime >= 1.0)
             {
-                if (_FPS_ID >= History_FPS_CAP)
+                if (m_FPS_ID >= History_FPS_CAP)
                 {
                     for (int i = 0; i < History_FPS_CAP - 2; ++i)
                     {
-                        _FPS[i] = _FPS[i + 1];
+                        m_FPS[i] = m_FPS[i + 1];
                     }
-                    --_FPS_ID;
+                    --m_FPS_ID;
                 }
-                _FPS[_FPS_ID] = _COUNTER;
-                ++_FPS_ID;
+                m_FPS[m_FPS_ID] = m_COUNTER;
+                ++m_FPS_ID;
                 Reset();
             }
         }
@@ -111,7 +111,7 @@ namespace GreenXNA.Statistics
         /// <returns>last calculated FPS</returns>
         public int GetFPS()
         {
-            return _FPS[Math.Max(0,_FPS_ID - 1)];
+            return m_FPS[Math.Max(0,m_FPS_ID - 1)];
         }
 
         /// <summary>
@@ -119,8 +119,8 @@ namespace GreenXNA.Statistics
         /// </summary>
         public void Reset()
         {
-            _CurrentTime = 0;
-            _COUNTER = 0;
+            m_CurrentTime = 0;
+            m_COUNTER = 0;
         }
 
         /// <summary>
@@ -134,14 +134,14 @@ namespace GreenXNA.Statistics
             {
                 if (i < History_FPS_CAP)
                 {
-                    newHistory[i] = _FPS[i];
+                    newHistory[i] = m_FPS[i];
                 }
                 else
                 {
                     newHistory[i] = 0;
                 }
             }
-            _FPS = newHistory;
+            m_FPS = newHistory;
         }
     }
 }

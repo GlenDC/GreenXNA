@@ -3,7 +3,7 @@
 // Math3D.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
-// Copyright (C) 2013-2014 Glen De Cauwsemaecker
+// Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify

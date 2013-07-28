@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// MathGeneral.cs
+// IFileIO.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014       ***     Last Edit: July 2013
@@ -15,32 +15,32 @@
 
 #region Using Statements
 using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
+
+using GreenXNA.Generic;
+using GreenXNA.GreenHelpers;
 #endregion
 
-namespace GreenXNA.GreenMath
+namespace GreenXNA.IO
 {
-    public static class MathGeneral
+    /// <summary>
+    /// Small interface that defines methods, usable in classes
+    /// that implement (de)serialization functionalities.
+    /// </summary>
+    interface IFileIO
     {
         /// <summary>
-        /// round up or down, depending on the value
+        /// Open an excisting file or start a new one
         /// </summary>
-        /// <param name="originalValue">original value to be rounded</param>
-        /// <param name="moduloValue">modulo value to check</param>
-        /// <returns>rounded value</returns>
-        public static float RoundToNearest(float originalValue, float moduloValue)
-        {
-            if (originalValue % moduloValue > moduloValue / 2.0f)
-            {
-                return originalValue + moduloValue - (originalValue % moduloValue);
-            }
-            else
-            {
-                return originalValue - (originalValue % moduloValue);
-            }
-        }
+        /// <param name="file">name of the file, including extension</param>
+        /// <param name="path">dynamic directory path of the file</param>
+        /// <returns>true if succesfull</returns>
+        bool Open(string file, string path);
+        /// <summary>
+        /// Close a file, so that i will become unlocked.
+        /// </summary>
+        /// <returns>true if succesfull</returns>
+        bool Close();
     }
 }

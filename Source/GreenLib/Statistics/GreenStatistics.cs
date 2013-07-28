@@ -3,7 +3,7 @@
 // GreenStatistics.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
-// Copyright (C) 2013-2014 Glen De Cauwsemaecker
+// Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
@@ -34,11 +34,11 @@ namespace GreenXNA.Statistics
         /// <summary>
         /// FPS Class, calculating the FPS (Most usefull for end-user)
         /// </summary>
-        private static FPS _FPS;
+        private static FPS m_FPS;
         /// <summary>
         /// Get the last calculated FPS Value
         /// </summary>
-        public static int FPS { get { return _FPS.GetFPS(); } }
+        public static int FPS { get { return m_FPS.GetFPS(); } }
         /// <summary>
         /// Get the last calculated FPS Value in a 2-digit string format
         /// </summary>
@@ -46,7 +46,7 @@ namespace GreenXNA.Statistics
         /// <summary>
         /// Get the average FPS value
         /// </summary>
-        public static int AVERAGE_FPS { get { return _FPS.AverageFPS; } }
+        public static int AVERAGE_FPS { get { return m_FPS.AverageFPS; } }
         /// <summary>
         /// Get the average FPS value in a 2-digit string format
         /// </summary>
@@ -54,11 +54,11 @@ namespace GreenXNA.Statistics
         /// <summary>
         /// Get the complete FPS History
         /// </summary>
-        public static int[] FPS_HISTORY { get { return _FPS.FPSHistory; } }
+        public static int[] FPS_HISTORY { get { return m_FPS.FPSHistory; } }
         /// <summary>
         /// Get the cap for the history FPS array
         /// </summary>
-        public static int FPS_HISTORY_CAP { get { return _FPS.History_FPS_CAP; } }
+        public static int FPS_HISTORY_CAP { get { return m_FPS.History_FPS_CAP; } }
 
         /// <summary>
         /// initialize the Statistics.
@@ -66,8 +66,8 @@ namespace GreenXNA.Statistics
         public static void Initialize()
         {
             // initialize the FPS-object
-            _FPS = new FPS();
-            _FPS.Initialize();
+            m_FPS = new FPS();
+            m_FPS.Initialize();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace GreenXNA.Statistics
         /// <param name="dt">time in seconds, since lastu pdate</param>
         public static void Update(double dt)
         {
-            _FPS.Update(dt);
+            m_FPS.Update(dt);
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// GreenDelegates.cs
+// FileRootDictionary.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Math Public License as published by
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //-----------------------------------------------------------------------------
@@ -15,22 +15,24 @@
 
 #region Using Statements
 using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+
+using GreenXNA.Generic;
+using GreenXNA.GreenHelpers;
 #endregion
 
-namespace GreenXNA.GreenInterfaces
+namespace GreenXNA.IO
 {
     /// <summary>
-    /// A function with a void return value and no parameters
+    /// Dictionary, containing GenericTypeDictionaries.
     /// </summary>
-    public delegate void DVoid();
-    /// <summary>
-    /// Delegate to be used to check something.
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public delegate bool DIsTrue(object obj);
+    public class FileRootDictionary : GenericDictionary<GenericTypeDictionary>
+    {
+        public FileRootDictionary()
+            : base()
+        { 
+        }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// GreenDelegates.cs
+// IClone.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014       ***     Last Edit: July 2013
@@ -23,14 +23,12 @@ using System.Collections.Generic;
 
 namespace GreenXNA.GreenInterfaces
 {
-    /// <summary>
-    /// A function with a void return value and no parameters
-    /// </summary>
-    public delegate void DVoid();
-    /// <summary>
-    /// Delegate to be used to check something.
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public delegate bool DIsTrue(object obj);
+    public interface IClone<T>
+    {
+        /// <summary>
+        /// Clone Function, copies all the content of the object to a new object. 
+        /// </summary>
+        /// <returns>indepentend copy, containing all the content of the original object</returns>
+        T Clone();
+    }
 }

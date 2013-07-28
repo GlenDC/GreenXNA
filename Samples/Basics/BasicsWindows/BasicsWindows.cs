@@ -11,7 +11,9 @@ using Microsoft.Xna.Framework.GamerServices;
 using GreenXNA.Statistics;
 using GreenXNA.GreenHelpers;
 
-using GreenXNA.Serialize.JSON;
+using GreenXNA.IO.JSON;
+
+using GreenXNA.IO.XML;
 #endregion
 
 namespace BasicsWindows
@@ -47,8 +49,9 @@ namespace BasicsWindows
 
             GreenStatistics.Initialize();
 
-            JSONParser parser = new JSONParser("container", "../temp/");
-            parser.Read();
+            //JSONParser parser = new JSONParser("container.json", "../temp/");
+            //parser.Read();
+
         }
 
         /// <summary>
@@ -69,6 +72,7 @@ namespace BasicsWindows
         /// </summary>
         protected override void UnloadContent()
         {
+            GreenXNA.GREENXNA.Serialize();
             // TODO: Unload any non ContentManager content here
         }
 

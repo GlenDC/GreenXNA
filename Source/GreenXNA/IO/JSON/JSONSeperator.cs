@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// MathGeneral.cs
+// JSONSeperator.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014       ***     Last Edit: July 2013
@@ -15,32 +15,43 @@
 
 #region Using Statements
 using System;
+using System.Xml;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Schema;
 using System.Collections.Generic;
+
+using GreenXNA.GreenInterfaces;
+using GreenXNA.GreenHelpers;
 #endregion
 
-namespace GreenXNA.GreenMath
+namespace GreenXNA.IO.JSON
 {
-    public static class MathGeneral
+    /// <summary>
+    /// JSON Seperator Type
+    /// </summary>
+    public class JSONSeperator : JSONBaseValue
     {
-        /// <summary>
-        /// round up or down, depending on the value
-        /// </summary>
-        /// <param name="originalValue">original value to be rounded</param>
-        /// <param name="moduloValue">modulo value to check</param>
-        /// <returns>rounded value</returns>
-        public static float RoundToNearest(float originalValue, float moduloValue)
+        public JSONSeperator()
+            : base(JSON_VALUE_TYPE.json_seperator)
+        { /* DO NOTHING */ }
+
+        public override string ToString()
         {
-            if (originalValue % moduloValue > moduloValue / 2.0f)
-            {
-                return originalValue + moduloValue - (originalValue % moduloValue);
-            }
-            else
-            {
-                return originalValue - (originalValue % moduloValue);
-            }
+            return "null";
         }
+
+        /// <summary>
+        /// Clone a JSONSeperator to a new object
+        /// </summary>
+        /// <returns>independend clone of the original JSONSeperator</returns>
+        public override JSONBaseValue Clone()
+        {
+            JSONSeperator element = new JSONSeperator();
+            return element;
+        }
+
+        protected override void Destroy() { }
     }
 }

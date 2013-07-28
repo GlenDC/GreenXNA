@@ -3,7 +3,7 @@
 // GreenXNAMain.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
-// Copyright (C) 2013-2014 Glen De Cauwsemaecker
+// Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,8 +22,8 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
-using GreenXNA.Serialize;
-using GreenXNA.Serialize.INI;
+using GreenXNA.IO;
+using GreenXNA.IO.INI;
 #endregion
 
 namespace GreenXNA
@@ -33,25 +33,37 @@ namespace GreenXNA
     /// </summary>
     public static class GREENXNA
     {
-        public static INIParameterContainer Settings { get; private set; }
+        public static INIFileContainer Settings { get; private set; }
+        public const string PATH_CONFIG = "../Config/";
 
         public static void Initialize()
         {
-            LoadConfig("../Config/");
+            LoadConfig();
             ConfigFramework();
         }
 
         /// <summary>
         /// Load all the config files!
         /// </summary>
-        private static void LoadConfig(string configPath)
+        private static void LoadConfig()
         {
-            Settings = new INIParameterContainer("GreenXNA", configPath);
+            Settings = new INIFileContainer("GreenXNA.ini", PATH_CONFIG);
+            Settings.Load();
         }
 
         private static void ConfigFramework()
         {
-            Converter.SetCulture(Settings.GetString("FileParsing", "culture"));
+            Converter.SetCulture(Settings["FileParsing"]["culture"].Get<string>());
+        }
+
+        public static void Serialize()
+        {
+            SerializeConfig();
+        }
+
+        private static void SerializeConfig()
+        {
+            Settings.Save();
         }
     }
 }

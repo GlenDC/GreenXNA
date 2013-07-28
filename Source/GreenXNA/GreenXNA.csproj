@@ -47,45 +47,25 @@
     <Compile Include="GreenHelpers\GFX.cs" />
     <Compile Include="GreenMath\Math3D.cs" />
     <Compile Include="GREENXNA.cs" />
+    <Compile Include="IO\JSON\GenericTypeExtensions.cs" />
+    <Compile Include="IO\JSON\JSONArray.cs" />
+    <Compile Include="IO\JSON\JSONBaseValue.cs" />
+    <Compile Include="IO\JSON\JSONObject.cs" />
+    <Compile Include="IO\JSON\JSONPair.cs" />
+    <Compile Include="IO\JSON\JSONParser.cs" />
+    <Compile Include="IO\JSON\JSONSeperator.cs" />
+    <Compile Include="IO\XML\XMLDebugParser.cs" />
+    <Compile Include="IO\XML\XMLParser.cs" />
+    <Compile Include="IO\XML\XMLWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialize\Converter.cs" />
-    <Compile Include="Serialize\INI\IniParser.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\INI\INIParameterContainer.cs" />
-    <Compile Include="Serialize\JSON\GenericTypeExtensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\JSON\JSONArray.cs" />
-    <Compile Include="Serialize\JSON\JSONBaseValue.cs" />
-    <Compile Include="Serialize\JSON\JSONObject.cs" />
-    <Compile Include="Serialize\JSON\JSONPair.cs" />
-    <Compile Include="Serialize\JSON\JSONParameterContainer.cs" />
-    <Compile Include="Serialize\JSON\JSONParser.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\JSON\JSONSeperator.cs" />
-    <Compile Include="Serialize\ParameterContainer.cs" />
-    <Compile Include="Serialize\Parser.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\XML\XMLDebugParser.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\XML\XMLParameterContainer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\XML\XMLParser.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Serialize\XML\XMLWriter.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="IO\Converter.cs" />
+    <Compile Include="IO\Serialize.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ErrorHandling\" />
     <Folder Include="GreenInterfaces\" />
     <Folder Include="Input\" />
+    <Folder Include="IO\INI\" />
     <Folder Include="Multithreading\" />
     <Folder Include="Physics\Physics2D\" />
     <Folder Include="Statistics\" />

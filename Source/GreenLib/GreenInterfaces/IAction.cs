@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// GreenDelegates.cs
+// IAction.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014       ***     Last Edit: July 2013
@@ -24,13 +24,18 @@ using System.Collections.Generic;
 namespace GreenXNA.GreenInterfaces
 {
     /// <summary>
-    /// A function with a void return value and no parameters
+    /// Interface used to record actions, 
+    /// in most cases triggered by user input
     /// </summary>
-    public delegate void DVoid();
-    /// <summary>
-    /// Delegate to be used to check something.
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public delegate bool DIsTrue(object obj);
+    interface IAction
+    {
+        /// <summary>
+        /// The action as it has been recorded.
+        /// </summary>
+        void DoAction();
+        /// <summary>
+        /// The same recorded action, but reversed.
+        /// </summary>
+        void DoReverse();
+    }
 }

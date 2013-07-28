@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// MathGeneral.cs
+// XMLElement.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
 // Copyright (C) 2013-2014       ***     Last Edit: July 2013
@@ -15,32 +15,32 @@
 
 #region Using Statements
 using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
+
+using GreenXNA.Generic;
+using GreenXNA.GreenHelpers;
 #endregion
 
-namespace GreenXNA.GreenMath
+namespace GreenXNA.IO.XML
 {
-    public static class MathGeneral
+    public class XMLElement : GenericDictionary<XMLElement>
     {
+        public GenericTypeDictionary Attributes { get; private set; }
+        public TObject Value { get; set; }
+
+        public bool HasChildren { get { return m_Container.Count != 0; } }
+        public bool HasAttributes { get { return !Attributes.IsEmpty; } }
+
         /// <summary>
-        /// round up or down, depending on the value
+        /// Create a dictionary, usable with all classes
+        /// based on the ITemplateType interface.
         /// </summary>
-        /// <param name="originalValue">original value to be rounded</param>
-        /// <param name="moduloValue">modulo value to check</param>
-        /// <returns>rounded value</returns>
-        public static float RoundToNearest(float originalValue, float moduloValue)
+        public XMLElement()
+            : base()
         {
-            if (originalValue % moduloValue > moduloValue / 2.0f)
-            {
-                return originalValue + moduloValue - (originalValue % moduloValue);
-            }
-            else
-            {
-                return originalValue - (originalValue % moduloValue);
-            }
+            Attributes = new GenericTypeDictionary();
+            Value = null;
         }
     }
 }

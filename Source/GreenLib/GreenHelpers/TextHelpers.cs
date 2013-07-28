@@ -3,7 +3,7 @@
 // TextHelpers.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
-// Copyright (C) 2013-2014 Glen De Cauwsemaecker
+// Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
@@ -273,6 +273,41 @@ namespace GreenXNA.GreenHelpers
                 } while (result == ' ' && str.Length > 0);
             }
             return result;
+        }
+
+        /// <summary>
+        /// Retrieve the extension of a file name
+        /// </summary>
+        /// <param name="file">name of the file</param>
+        /// <returns>extension of the file as a string object</returns>
+        public static string GetFileExtension(string file)
+        {
+            int ext_start = file.LastIndexOf('.');
+            return file.Substring(ext_start);
+        }
+
+        /// <summary>
+        /// Retrieve the name of a file name ( without the exension 
+        /// </summary>
+        /// <param name="file">name of the file</param>
+        /// <returns>name of the file as a string object</returns>
+        public static string GetFileName(string file)
+        {
+            int name_length = file.LastIndexOf('.');
+            return file.Substring(0, name_length);
+        }
+
+        /// <summary>
+        /// Get the extension and name seperatly of a filename
+        /// </summary>
+        /// <param name="file">name of the file</param>
+        /// <param name="name">name of the file without the extension (result)</param>
+        /// <param name="extension">extenion of the file without the point (result)</param>
+        public static void SplitFileName(string file, out string name, out string extension)
+        {
+            int ext_start = file.LastIndexOf('.');
+            extension = file.Substring(ext_start+1);
+            name = file.Substring(0, ext_start);
         }
     }
 }

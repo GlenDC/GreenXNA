@@ -3,7 +3,7 @@
 // Helpers.cs
 //
 // GreenXNA Open Source Crossplatform Game Development Framework
-// Copyright (C) 2013-2014 Glen De Cauwsemaecker
+// Copyright (C) 2013-2014       ***     Last Edit: July 2013
 // More information and details can be found at http://www.greenxna.com/
 //
 // This program is free software: you can redistribute it and/or modify
@@ -33,6 +33,19 @@ namespace GreenXNA.GreenHelpers
         public static uint GenerateHash(string str)
         {
             uint hash = 0;
+            for (int i = 0; i < str.Count(); ++i)
+                hash = 65599 * hash + str[i];
+            return hash ^ (hash >> 16);
+        }
+
+        /// <summary>
+        /// Generate long hash value based on a string value
+        /// </summary>
+        /// <param name="str">string value to be converted to a hash value</param>
+        /// <returns>generated hash value based on the input parameter (string)</returns>
+        public static ulong GenerateLongHash(string str)
+        {
+            ulong hash = 0;
             for (int i = 0; i < str.Count(); ++i)
                 hash = 65599 * hash + str[i];
             return hash ^ (hash >> 16);
