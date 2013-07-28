@@ -6,10 +6,6 @@ The goal of GreenXNA is to allow Game Developers, familiar with XNA and/or MonoG
 
 ## Current Stage: In Development
 
-## Next Expected Release: 
-* 30th of July, 2013
-* Version 0.0.1
-
 ## Supported Platforms
 
 * Implemented:
