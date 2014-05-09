@@ -109,7 +109,7 @@ namespace GreenXNA.Generic
         /// Convert the value of this type to a string
         /// </summary>
         /// <returns>string, containing the type's value</returns>
-        public string ToString()
+        public override string ToString()
         {
             string output = null;
             var enumerator = m_Value.GetEnumerator();
