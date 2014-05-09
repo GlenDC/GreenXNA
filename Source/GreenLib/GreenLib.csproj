@@ -69,8 +69,15 @@
     <Compile Include="IO\IParseJumper.cs" />
     <Compile Include="IO\ISerializer.cs" />
     <Compile Include="IO\ISmartFileParser.cs" />
+    <Compile Include="IO\JSON\GenericTypeExtensions.cs" />
+    <Compile Include="IO\JSON\JSONArray.cs" />
+    <Compile Include="IO\JSON\JSONBaseValue.cs" />
     <Compile Include="IO\JSON\JSONFileContainer.cs" />
     <Compile Include="IO\JSON\JSONFileParser.cs" />
+    <Compile Include="IO\JSON\JSONObject.cs" />
+    <Compile Include="IO\JSON\JSONPair.cs" />
+    <Compile Include="IO\JSON\JSONParser.cs" />
+    <Compile Include="IO\JSON\JSONSeperator.cs" />
     <Compile Include="IO\XML\XMLElement.cs" />
     <Compile Include="IO\XML\XMLFileContainer.cs" />
     <Compile Include="IO\XML\XMLFileParser.cs" />

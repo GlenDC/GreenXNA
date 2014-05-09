@@ -56,10 +56,13 @@ namespace GreenXNA.IO.JSON
 
         protected override void SaveFile(string path, string file)
         {
+            // :TODO: FIX:
+            /*
             using (JSONFileSerializer serializer = new JSONFileSerializer(path, file))
             {
                 serializer.Write(this);
             }
+             */
         }
     }
 }
