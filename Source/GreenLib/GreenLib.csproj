@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GreenXNA</RootNamespace>
     <AssemblyName>GreenLib</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -32,10 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -48,8 +44,10 @@
     <Compile Include="Generic\TKeyValuePair.cs" />
     <Compile Include="Generic\TList.cs" />
     <Compile Include="GreenHelpers\ContainerHelpers.cs" />
+    <Compile Include="GreenHelpers\HashSet.cs" />
     <Compile Include="GreenHelpers\Helpers.cs" />
     <Compile Include="GreenHelpers\TextHelpers.cs" />
+    <Compile Include="GreenHelpers\Tuple.cs" />
     <Compile Include="GreenInterfaces\IAction.cs" />
     <Compile Include="GreenInterfaces\IClone.cs" />
     <Compile Include="GreenInterfaces\GreenDelegates.cs" />
@@ -69,15 +67,6 @@
     <Compile Include="IO\IParseJumper.cs" />
     <Compile Include="IO\ISerializer.cs" />
     <Compile Include="IO\ISmartFileParser.cs" />
-    <Compile Include="IO\JSON\GenericTypeExtensions.cs" />
-    <Compile Include="IO\JSON\JSONArray.cs" />
-    <Compile Include="IO\JSON\JSONBaseValue.cs" />
-    <Compile Include="IO\JSON\JSONFileContainer.cs" />
-    <Compile Include="IO\JSON\JSONFileParser.cs" />
-    <Compile Include="IO\JSON\JSONObject.cs" />
-    <Compile Include="IO\JSON\JSONPair.cs" />
-    <Compile Include="IO\JSON\JSONParser.cs" />
-    <Compile Include="IO\JSON\JSONSeperator.cs" />
     <Compile Include="IO\XML\XMLElement.cs" />
     <Compile Include="IO\XML\XMLFileContainer.cs" />
     <Compile Include="IO\XML\XMLFileParser.cs" />

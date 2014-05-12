@@ -15,9 +15,7 @@
 
 #region Using Statements
 using System;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 #endregion
 
@@ -33,7 +31,7 @@ namespace GreenXNA.GreenHelpers
         public static uint GenerateHash(string str)
         {
             uint hash = 0;
-            for (int i = 0; i < str.Count(); ++i)
+            for (int i = 0; i < str.Length; ++i)
                 hash = 65599 * hash + str[i];
             return hash ^ (hash >> 16);
         }
@@ -46,7 +44,7 @@ namespace GreenXNA.GreenHelpers
         public static ulong GenerateLongHash(string str)
         {
             ulong hash = 0;
-            for (int i = 0; i < str.Count(); ++i)
+            for (int i = 0; i < str.Length; ++i)
                 hash = 65599 * hash + str[i];
             return hash ^ (hash >> 16);
         }
